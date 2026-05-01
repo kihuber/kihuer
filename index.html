@@ -364,13 +364,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-bottom: 32px;
       padding: 14px 20px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
     }
-    .sort-bar span { font-size: 13px; color: var(--text-muted); }
+    .sort-bar span { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+    .sort-bar-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .sort-select {
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -649,6 +652,10 @@
       .nav-links { display: none; }
       .section { padding: 48px 20px; }
       footer { padding: 32px 20px 20px; }
+      .sort-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .sort-bar > div { width: 100%; }
+      .sort-select { width: 100%; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
     }
   </style>
 </head>
@@ -751,7 +758,7 @@
 
       <div class="sort-bar">
         <span id="product-count">0 productos</span>
-        <div style="display:flex;align-items:center;gap:8px;">
+        <div class="sort-bar-right">
           <span style="font-size:13px;color:var(--text-muted);">Ordenar por:</span>
           <select class="sort-select" onchange="sortProducts(this.value)">
             <option value="precio-asc">Precio: menor a mayor</option>
@@ -811,7 +818,9 @@ var PRODUCTS = [
   { id:3,  brand:'Genérico',  name:'Audífonos inalámbricos Bluetooth 5.0 TWS',         price:45.90,  oldPrice:null,   img:'https://i.postimg.cc/0j2MbSsb/Chat-GPT-Image-29-abr-2026-03-44-p-m.png',  badge:null,     badgeType:''     },
   { id:4,  brand:'Genérico',  name:'Grabadora de voz digital 8GB larga duración',      price:55.00,  oldPrice:70.00,  img:'https://i.postimg.cc/L56YnPpY/Chat-GPT-Image-29-abr-2026-04-05-24-p-m.png',  badge:'-21%',   badgeType:'sale' },
   { id:5,  brand:'Genérico',  name:'Cámara de seguridad WiFi 360° para interiores',    price:110.00, oldPrice:null,   img:'https://i.postimg.cc/gjkXnhWs/Chat-GPT-Image-29-abr-2026-04-07-09-p-m.png',  badge:null,     badgeType:''     },
-  
+  { id:6,  brand:'Genérico',  name:'Audífonos con cancelación de ruido over-ear',      price:68.00,  oldPrice:89.00,  img:'',  badge:'-24%',   badgeType:'sale' },
+  { id:7,  brand:'Genérico',  name:'Cámara dashcam para auto Full HD con loop',        price:95.00,  oldPrice:null,   img:'',  badge:'NUEVO',  badgeType:'new'  },
+  { id:8,  brand:'Genérico',  name:'Mini audífonos TWS impermeables IPX5',             price:38.00,  oldPrice:50.00,  img:'',  badge:'-24%',   badgeType:'sale' },
 ];
 
 var currentProducts = PRODUCTS.slice();
@@ -1013,6 +1022,5 @@ renderProducts(currentProducts);
   draw();
 })();
 </script>
-  <script defer src="/_vercel/analytics/script.js"></script>
 </body>
 </html>
